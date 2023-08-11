@@ -1,13 +1,36 @@
-const Form = () => {
+import React from "react";
+
+const Form = ({ todos, setTodos, inputText, setInputText }) => {
+  const inputTextHandler = (event) => {
+    console.log(event.target.value);
+    setInputText(event.target.value);
+  };
+
+  const submitTodoHandler = (e) => {
+    setTodos([
+      ...todos,
+      {
+        text: inputText,
+        completed: false,
+        id: Math.random() * 100,
+      },
+    ]);
+
+    setInputText("");
+  };
+
   return (
-    <div className="text-center flex justify-center space-x-5 my-20">
+    <div className=" flex justify-center space-x-5 my-20">
       <input
         type="text"
-        className="todo-input focus:outline-none px-3 py-2 w-2/6 rounded-md text-lg"
+        value={inputText}
+        className="todo-input focus:outline-none px-3 py-2 rounded-md text-lg w-2/6"
+        onChange={inputTextHandler}
       />
       <button
         className="todo-button w-1/12 bg-blue-700 text-white text-xl font-bold rounded-md hover:bg-orange-700 "
         type="submit"
+        onClick={submitTodoHandler}
       >
         Add
       </button>
