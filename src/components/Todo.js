@@ -3,7 +3,6 @@ import React from "react";
 const Todo = ({ text, todo, todos, setTodos }) => {
   //deleteHandler
   const deleteHandler = () => {
-    //console.log("todo - ", todo);
     setTodos(
       todos.filter((el) => {
         return el.id !== todo.id;
@@ -29,7 +28,14 @@ const Todo = ({ text, todo, todos, setTodos }) => {
   return (
     <div className="flex justify-center items-center">
       <div className="todo flex text-xl justify-between bg-white m-2 rounded-lg items-center pl-3 w-full">
-        <li className="todo-item flex-1">{text}</li>
+        <li
+          className={`todo-item flex-1 ${
+            todo.completed && "line-through opacity-20 bg-gray-100"
+          }`}
+        >
+          {text}
+          {todo.title}
+        </li>
 
         <button
           className="complete-btn bg-green-600 py-2 px-3 text-white"
